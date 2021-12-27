@@ -11,13 +11,10 @@ const Todos = () => {
 
     const Todos = dispatch(fetchTodos());
 
-    console.log(Todos);
-
     return (
         <Fragment>
-
+            <AllTodos />
             <AddTodos />
-            <AllTodos/>
         </Fragment>
     )
 }

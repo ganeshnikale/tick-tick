@@ -1,32 +1,70 @@
 import {todosSliceAction} from './todosSlice';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { firestore, convertCollectionMap } from '../utils/firebase';
+import {fetchProject} from './projectsAction';
 
-export const fetchTodos = () => {
+
+
+
+export const fetchTodos = (userID) => {
+   
     return async(dispatch) => {
-        const userID = useSelector(state => state.users.user[0].userId);
-        const allTodos = await fetch(`https://ticktick-a750c-default-rtdb.asia-southeast1.firebasedatabase.app/todos/${userID}.json`).then(x => x.json()).then(y => y);
-        console.log(allTodos);
-        const todosList = [];
+        
+        
+       // const allTodos = await fetch(`https://ticktick-a750c-default-rtdb.asia-southeast1.firebasedatabase.app/todos/${userID}.json`).then(x => x.json()).then(y => y);
+        let todosList = null;
+        let ProjectList = null;
+        // for(let id in allTodos) {
+        //     todosList.push(allTodos[id])
+        // }
+         //dispatch(todosSliceAction.setTodo({todos: todosList}));
+        const todoStoreRef =  firestore.collection('todos');
+        const projectStoreRef = firestore.collection('projects');
 
-        for(let id in allTodos) {
-            todosList.push(allTodos[id])
-        }
-        dispatch(todosSliceAction.setTodo({todos: allTodos}));
+        
+      
 
+        todoStoreRef.where("userId", "==", userID).onSnapshot( async snapshot => {
+             todosList =  snapshot.docs.map(x => x.data());
+            
+
+             projectStoreRef.where("userId", "==",  userID).onSnapshot( async snapshot => {
+                ProjectList = snapshot.docs.map(x => x.data())
+              
+                 let taskProjectMerge = await mergeById(todosList, ProjectList);
+                 await dispatch(todosSliceAction.setTodo({todos: taskProjectMerge}));
+            } );
+        });
+        
+        
+
+        //todoStoreRef.where("userId", "==", 1).get().then(x => {x.docs.map( y => console.log(y.data()))})
+        // const query = todoStoreRef.isEqual("userId", 3);
+        // console.log(query);
+        
     }
 }
 
 
 
-export const AddTodo = () => {
+  const mergeById = (array1, array2) =>
+    array1.map(itm => ({
+      ...array2.find((item) => (item.projectId === itm.projectId) && item),
+      ...itm
+    }));
+  
+
+
+export const AddTodo = (todoData) => {
+    
     return async(dispatch) => {
-        const addTodo = fetch(`https://ticktick-a750c-default-rtdb.asia-southeast1.firebasedatabase.app/todos.json`, {
-            method: "POST",
-            body: JSON.stringify(
-                {"projectId": 1, "status": "pending", text: "dkdkdkdkd"}
-            )
-        });
-        dispatch(todosSliceAction.addTodos({pushTodos:{"projectId": 1, "status": "pending", text: "dkdkdkdkd"}}))
+        const date = new Date();
+        const todoStoreRef =  firestore.collection('todos').doc();
+        await todoStoreRef.set({
+            "projectId": todoData.projectId, "status": "pending", text: todoData.todoText,discription:todoData.todoDicscription, createAt: date.toISOString(), userId: todoData.uid
+        })
+
+        dispatch(todosSliceAction.addTodos({pushTodos:{"projectId": todoData.projectId, status: "pending", text: todoData.todoText,discription:todoData.todoDicscription}}))
 
     }
 }

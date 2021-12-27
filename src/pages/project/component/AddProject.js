@@ -2,6 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {addProjects} from "../../../store/projectsAction";
 
+import { 
+    Form,
+    Input,
+    Button,
+   Card
+   } from 'antd';
+
 
 const AddProject = () => {
     const dispatch = useDispatch();
@@ -11,6 +18,7 @@ const AddProject = () => {
     
     const projectName = React.createRef();
     const addProjectHandler = (event) => {
+        
         event.preventDefault();
         dispatch(addProjects({projectName:projectName.current.value, userId: user[0].userId}));
 
@@ -18,10 +26,15 @@ const AddProject = () => {
  
 
     return (
-        <form >
-            <input type="text" ref={projectName} />
-            <button onClick={addProjectHandler}>Add Project</button>
-        </form>
+        <Card title="Add Project">
+            <Form layout="vertical">
+                <Form.Item label="Project Name">
+                    <Input  ref={projectName} placeholder="Add Project Name"/>
+                </Form.Item>
+
+                <Button onClick={addProjectHandler}>Add Project</Button>
+            </Form>
+        </Card>
     )
 }
 

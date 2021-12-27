@@ -5,11 +5,10 @@ const todosSlice = createSlice({
     initialState: {todos:[]},
     reducers: {
         setTodo(state,action) {
-            console.log(action.payload.todos);
-            //state.todos = action.payload.todos
+             state.todos = action.payload.todos
+            // console.log(state.todos , action.payload.todos)
         },
         addTodos(state, action) {
-            console.log(action.payload.pushTodos);
             state.todos.push(action.payload.pushTodos);
         }
     }
