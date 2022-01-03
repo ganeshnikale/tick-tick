@@ -38,3 +38,18 @@
   }
 }
 
+.complete {
+  background: rgba(0, 94, 0,  0.4);
+}    
+
+.pending {
+  background: rgba(255, 235, 75,  0.4)
+}
+
+.ongoing {
+  background: rgba(63, 0, 94, 0.4);
+}
+
+.hold {
+  background: rgba(94, 0, 0, 0.4);
+}

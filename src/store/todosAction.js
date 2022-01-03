@@ -1,15 +1,15 @@
-import {todosSliceAction} from './todosSlice';
+import todosSlice, {todosSliceAction} from './todosSlice';
 import { useSelector,useDispatch } from 'react-redux';
 import { firestore, convertCollectionMap } from '../utils/firebase';
 import {fetchProject} from './projectsAction';
-
+const { v4: uuidv4 } = require('uuid');
 
 
 
 export const fetchTodos = (userID) => {
    
     return async(dispatch) => {
-        
+       
         
        // const allTodos = await fetch(`https://ticktick-a750c-default-rtdb.asia-southeast1.firebasedatabase.app/todos/${userID}.json`).then(x => x.json()).then(y => y);
         let todosList = null;
@@ -22,8 +22,6 @@ export const fetchTodos = (userID) => {
         const projectStoreRef = firestore.collection('projects');
 
         
-      
-
         todoStoreRef.where("userId", "==", userID).onSnapshot( async snapshot => {
              todosList =  snapshot.docs.map(x => x.data());
             
@@ -61,10 +59,38 @@ export const AddTodo = (todoData) => {
         const date = new Date();
         const todoStoreRef =  firestore.collection('todos').doc();
         await todoStoreRef.set({
-            "projectId": todoData.projectId, "status": "pending", text: todoData.todoText,discription:todoData.todoDicscription, createAt: date.toISOString(), userId: todoData.uid
+            "projectId": todoData.projectId, 
+            "todoId": todoStoreRef.id, 
+            status: "pending",
+             text: todoData.todoText,
+             discription:todoData.todoDicscription,
+             createAt: date.toISOString(),
+             userId: todoData.uid
         })
 
-        dispatch(todosSliceAction.addTodos({pushTodos:{"projectId": todoData.projectId, status: "pending", text: todoData.todoText,discription:todoData.todoDicscription}}))
+        dispatch(todosSliceAction.addTodos({pushTodos:{"projectId": todoData.projectId, todoId: todoStoreRef.id, status: "pending", text: todoData.todoText,discription:todoData.todoDicscription}}))
 
+    }
+}
+
+
+export const ChangeStatus = ( status) => {
+    return async(dispatch) => {
+        let statusId = new Array;
+        statusId = status.split(",");
+        
+        const todoStoreRef =  firestore.collection('todos')
+        await todoStoreRef.doc(statusId[0]).update({"status":statusId[1] })
+       
+        //dispatch(todosSliceAction.changeStatus(statusId))
+    }
+}
+
+
+
+export const filterTodos = ( projectName) => {
+    return async(dispatch) => {
+      
+       await dispatch(todosSliceAction.filterTodosReducer(projectName))
     }
 }

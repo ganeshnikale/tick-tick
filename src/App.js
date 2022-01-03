@@ -3,14 +3,12 @@ import './App.css';
 import React,{useEffect} from 'react';
 
 import {useSelector, useDispatch} from 'react-redux';
-import Projects from './pages/project/project';
-import AllTodos from './pages/todos/component/allTodos';
-import HeaderNav from './pages/header/header';
-import  Pagelayout  from './pages/layout/Pagelayout';
-import AddProject from './pages/project/component/AddProject';
-import AllProjects from './pages/project/component/AllProjects';
+import AllTodos from './components/todos/allTodos';
+import AddTodos  from './components/todos/addTodos';
+import HeaderNav from './components/header/header';
+import AddProject from './components/projects/AddProject';
+import AllProjects from './components/projects/AllProjects';
 import {  Row, Col  } from 'antd';
-import AddTodos from './pages/todos/component/addTodos';
 
 import {fetchTodos} from './store/todosAction';
 import {fetchProject} from './store/projectsAction';
@@ -19,36 +17,49 @@ import {fetchProject} from './store/projectsAction';
 
 function App() {
   const dispatch = useDispatch();
-  const userID = useSelector(state => state.users.user[0].userId);
+  
+  const Guid = useSelector(state => state.users.googleuserDetails[0].uid);
+  console.log(Guid);
+  const userAuth = useSelector(state => state.users.userAuthenticated);
+  console.log(Guid)
 
   useEffect(() => {
-    dispatch(fetchTodos(userID));
-    dispatch(fetchProject(userID));
-  },[userID])
+    if(userAuth && Guid != undefined) {
+      dispatch(fetchTodos(Guid));
+      dispatch(fetchProject(Guid));
+    }
+  },[userAuth])
 
   return (
-    
       <Row>
-        <Col xs={24}>
+         <Col xs={24}>
            <HeaderNav />
         </Col>
-        <Col xs={2} sm={4} md={6} lg={4} xl={6}>
-            <AllProjects />
-        </Col>
 
-        <Col xs={2} sm={4} md={6} lg={4} xl={6}>
-          <AllTodos/>
-        </Col>
+       <Col xs={2} sm={4} md={6} lg={4} xl={6}>
+         {userAuth ? <AllProjects /> : ''}
+       
+     </Col>
 
-        <Col xs={2} sm={4} md={6} lg={4} xl={6}>
-          <AddProject/>
-        </Col>
+     <Col xs={2} sm={4} md={6} lg={4} xl={6}>
+     {userAuth ? <AllTodos/> : ''}
+       
+     </Col>
 
-        <Col xs={2} sm={4} md={6} lg={4} xl={6}>
-          <AddTodos/>
-        </Col>
+     <Col xs={2} sm={4} md={6} lg={4} xl={6}>
+     {userAuth ? <AddProject/> : ''}
+       
+     </Col>
 
+     <Col xs={2} sm={4} md={6} lg={4} xl={6}>
+     {userAuth ? <AddTodos/> : ''}
+       
+     </Col>
       </Row>
+      
+       
+        
+      
   );
 }
 

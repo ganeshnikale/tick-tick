@@ -1,7 +1,6 @@
 import React, {useRef} from "react";
-import { useDispatch } from "react-redux";
-import {AddTodo} from '../../../store/todosAction';
-import { useSelector } from "react-redux";
+import { useDispatch ,useSelector} from "react-redux";
+import {AddTodo} from '../../store/todosAction';
 import { 
     Form,
     Input,
@@ -11,7 +10,7 @@ import {
    } from 'antd';
 const AddTodos = () => {
 
-    const uid = useSelector(state => state.users.user[0].userId);
+    const uid = useSelector(state => state.users.googleuserDetails[0].uid);
     const Projects = useSelector(state => state.projects.project);
 
     
