@@ -5,9 +5,7 @@ const usersSlice = createSlice({
     initialState: {user:[{userName: "ganesh", userId: 3}], googleuserDetails: [{uid:0}], userNull:false,userAuthenticated: false},
     reducers: {
         setUser(state, action) {
-            
             state.user = action.payload.userDetails
-
         },
         setGoogleUser(state, action) {
             state.googleuserDetails = action.payload;
