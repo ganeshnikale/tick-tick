@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { googleSignIn, authUser, googleLogOut } from "../../store/usersAction";
 import { useDispatch, useSelector } from "react-redux";
-import { Layout, Menu, Button, Image } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Layout, Menu, Button, Image,Avatar, Row, Col,Dropdown } from "antd";
+import { UserOutlined,DownOutlined } from "@ant-design/icons";
+import './header.scss';
 import {
   signGoogle,
   auth,
@@ -36,14 +37,13 @@ const HeaderNav = () => {
     }
   });
 
+  
+
   return (
     <Layout>
-      <Header className="header">
-        <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
-          <Menu.Item key="1">All Projects</Menu.Item>
-          <Menu.Item key="2">All Tasks</Menu.Item>
-
+      <Header>
+      
+      <Menu theme="" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="3">
             {!userAuth ? (
               <Button
@@ -63,11 +63,12 @@ const HeaderNav = () => {
             {userAuth ? `${userDetails[0].displayName}` : ""}
           </Menu.Item>
 
-          <Menu.Item key="4">
-            {userAuth ? <Image preview={false} src={`${userDetails[0].photoURL}`} /> : ""}
+          <Menu.Item key="7">
+
+            {userAuth ? <Avatar src={<Image preview={false} src={`${userDetails[0].photoURL}`} style={{ width: 32,}}/> } /> : ""}
           </Menu.Item>
 
-          <Menu.Item key="5">
+          <Menu.Item key="6">
             {userAuth ? (
               <Button
                 type="primary"
