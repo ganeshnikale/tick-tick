@@ -61,14 +61,14 @@ export const AddTodo = (todoData) => {
         await todoStoreRef.set({
             "projectId": todoData.projectId, 
             "todoId": todoStoreRef.id, 
-            status: "pending",
+            status: "Backlog",
              text: todoData.todoText,
              discription:todoData.todoDicscription,
              createAt: date.toISOString(),
              userId: todoData.uid
         })
 
-        dispatch(todosSliceAction.addTodos({pushTodos:{"projectId": todoData.projectId, todoId: todoStoreRef.id, status: "pending", text: todoData.todoText,discription:todoData.todoDicscription}}))
+        dispatch(todosSliceAction.addTodos({pushTodos:{"projectId": todoData.projectId, todoId: todoStoreRef.id, status: "Backlog", text: todoData.todoText,discription:todoData.todoDicscription}}))
 
     }
 }

@@ -53,3 +53,15 @@
 .hold {
   background: rgba(94, 0, 0, 0.4);
 }
+
+.ant-col {
+  padding: 15px;
+}
+
+.ant-card-body {
+  padding: 15px;
+}
+
+.ant-layout {
+  background: #F8FAFC;
+}
