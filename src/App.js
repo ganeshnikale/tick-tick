@@ -14,26 +14,14 @@ import { fetchTodos } from "./store/todosAction";
 import { fetchProject } from "./store/projectsAction";
 
 function App() {
-  const dispatch = useDispatch();
-
-  const Guid = useSelector((state) => state.users.googleuserDetails[0].uid);
-  console.log(Guid);
-  const userAuth = useSelector((state) => state.users.userAuthenticated);
-  console.log(Guid);
-
-  useEffect(() => {
-    if (userAuth && Guid != undefined) {
-      dispatch(fetchTodos(Guid));
-      dispatch(fetchProject(Guid));
-    }
-  }, [userAuth]);
-
+  
   return (
     <Row>
 
       <Col xs={24}>
         <HomeLayout/>
         {/* <HeaderNav /> */}
+       
       </Col>
 
       {/* <Col xs={2} sm={4} md={6} lg={4} xl={6}>

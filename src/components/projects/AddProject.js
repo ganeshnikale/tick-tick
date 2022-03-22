@@ -20,7 +20,7 @@ const AddProject = () => {
 
     const addProjectHandler = (values) => {
         
-        console.log(values.projectName)
+        
         dispatch(addProjects({projectName:values.projectName, userId:uid}));
 
     }

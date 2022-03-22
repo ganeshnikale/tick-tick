@@ -22,10 +22,10 @@ const HeaderNav = () => {
 
   const userDetails = useSelector((state) => state.users.googleuserDetails);
 
-  console.log(userDetails);
+  
 
   auth.onAuthStateChanged((UserImpl) => {
-    console.log(UserImpl);
+    
     if (UserImpl) {
       dispatch(googleSignIn(UserImpl.providerData));
       dispatch(authUser(true));

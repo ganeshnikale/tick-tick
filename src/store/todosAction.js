@@ -38,7 +38,7 @@ export const fetchTodos = (userID) => {
 
         //todoStoreRef.where("userId", "==", 1).get().then(x => {x.docs.map( y => console.log(y.data()))})
         // const query = todoStoreRef.isEqual("userId", 3);
-        // console.log(query);
+        
         
     }
 }
@@ -92,5 +92,12 @@ export const filterTodos = ( projectName) => {
     return async(dispatch) => {
       
        await dispatch(todosSliceAction.filterTodosReducer(projectName))
+    }
+}
+
+
+export const filterByStatus = ( status) => {
+    return async(dispatch) => {
+        await dispatch(todosSliceAction.filterByStatusReducer(status))
     }
 }

@@ -11,7 +11,7 @@ const AllTodos = () => {
 
   const Todos = useSelector((state) => state.todos.filterSortedTodos);
   const filterBy = useSelector((state) => state.todos.filterBy);
-  console.log(filterBy);
+ 
 
 
   const ChangeStatusHandler = (values) => {
