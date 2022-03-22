@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 export const fetchProject=  (userID) => {
-    console.log(userID)
+    
     return async(dispatch) => {
         let ProjectList = null;
 
@@ -25,7 +25,7 @@ export const fetchProject=  (userID) => {
 
 
 export const addProjects = (projectName) => {
-    console.log(projectName)
+    
     let UID = projectName.userId;
     const uuid = uuidv4();
     const date = new Date();

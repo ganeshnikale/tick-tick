@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { googleSignIn, authUser, googleLogOut } from "../../store/usersAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Menu, Button, Image,Avatar, Row, Col,Dropdown } from "antd";
-import { UserOutlined,DownOutlined } from "@ant-design/icons";
+import { UserOutlined,LogoutOutlined } from "@ant-design/icons";
 import './header.scss';
 import {
   signGoogle,
@@ -22,10 +22,10 @@ const HeaderNav = () => {
 
   const userDetails = useSelector((state) => state.users.googleuserDetails);
 
-  console.log(userDetails);
+  
 
   auth.onAuthStateChanged((UserImpl) => {
-    console.log(UserImpl);
+    
     if (UserImpl) {
       dispatch(googleSignIn(UserImpl.providerData));
       dispatch(authUser(true));
@@ -72,11 +72,11 @@ const HeaderNav = () => {
             {userAuth ? (
               <Button
                 type="primary"
-                shape="round"
+                shape="circle"
                 onClick={googleSignOut}
-                icon={<UserOutlined />}
+                danger
+                icon={<LogoutOutlined />}
               >
-                Logout
               </Button>
             ) : (
               ""

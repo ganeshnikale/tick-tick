@@ -19,9 +19,9 @@ const AddTodos = () => {
     const [form] = Form.useForm();
     const AddTodoHandler = (values) => {
       
-        console.log(values)
+       
        dispatch(AddTodo({uid: uid, todoText: values.taskTitle,todoDicscription:values.taskDiscription, projectId:values.selectProject}));
-        //console.log(Projects);
+       
     }
 
     return(

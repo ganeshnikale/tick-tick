@@ -14,7 +14,7 @@ const usersSlice = createSlice({
             state.userAuthenticated = action.payload
         },
         signOut(state, action) {
-            console.log(action.payload);
+            
             state.googleuserDetails = action.payload
         }
     }
