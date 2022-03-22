@@ -12,16 +12,22 @@ import { Row, Col, Layout, Menu, Breadcrumb } from "antd";
 
 import { fetchTodos } from "./store/todosAction";
 import { fetchProject } from "./store/projectsAction";
+import AddTaskPage from "./pages/addTaskPage/addTaskPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  
   return (
     <Row>
-
       <Col xs={24}>
-        <HomeLayout/>
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/" element={<HomeLayout />} />
+
+            <Route path="/addTask" element={<AddTaskPage />} />
+          </Routes>
+        </BrowserRouter>
+
         {/* <HeaderNav /> */}
-       
       </Col>
 
       {/* <Col xs={2} sm={4} md={6} lg={4} xl={6}>
