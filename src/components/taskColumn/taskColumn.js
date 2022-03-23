@@ -1,8 +1,7 @@
-import { Col, Typography, Card, Divider } from "antd";
+import { Col, Typography } from "antd";
 import TaskCard from "../TaskCard/TaskCard";
 
 import { useSelector, useDispatch } from "react-redux";
-import AllTodos from "../todos/allTodos";
 import { useEffect } from "react";
 import { filterByStatus } from "../../store/todosAction";
 const { Title } = Typography;
@@ -16,7 +15,6 @@ const TaskColumn = (props) => {
   const userAuth = useSelector((state) => state.users.userAuthenticated);
 
   const Tasks = useSelector((state) => state.todos.filterByStatus);
-  console.log(Tasks[columnFor]);
 
   useEffect(() => {
     if (userAuth && Guid != undefined) {

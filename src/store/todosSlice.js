@@ -15,15 +15,13 @@ const todosSlice = createSlice({
 
       state.filterByStatus = action.payload.todos.reduce((next, current) => {
         const { status } = current;
-        if (next.hasOwnProperty(status) == true) {
-          //  console.log(next[status])
-          return { ...next, ...next[status].push(current) };
+        if (!next.hasOwnProperty(status)) {
+          return { ...next, [status]:[current] };
         } else {
-          return { ...next, [status]: [current] };
+          return { ...next, ...next[status].push(current) };
         }
       }, {});
 
-      // state.filterByStatus.complete = "aaaa";
     },
     addTodos(state, action) {
       state.todos.push(action.payload.pushTodos);

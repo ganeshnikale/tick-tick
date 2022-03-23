@@ -1,7 +1,5 @@
 import React from "react";
-// import ReactDOM from 'react-dom';
-// import 'antd/dist/antd.css';
-// import './index.css';
+
 import { Layout, Menu } from "antd";
 import {
   UploadOutlined,
@@ -10,8 +8,7 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+const {  Sider } = Layout;
 
 function Sidebar() {
   return (
@@ -27,7 +24,7 @@ function Sidebar() {
           <h1 className="text-white">Logo</h1>
         </Menu.Item>
         <Menu.Item key="1" icon={<UserOutlined />}>
-          Overview
+          <Link to="/">Overview </Link>
         </Menu.Item>
         <Menu.Item key="2" icon={<VideoCameraOutlined />}>
           <Link to="/addTask">Tasks</Link>

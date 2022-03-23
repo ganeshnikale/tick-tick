@@ -1,7 +1,7 @@
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { ChangeStatus } from "../../store/todosAction";
-import { Card, List, Radio, Typography, Form, Divider } from "antd";
-const { Title, Text, Paragraph } = Typography;
+import { Card, List, Radio, Typography, Divider } from "antd";
+const {  Paragraph } = Typography;
 const TaskCard = (props) => {
   const dispatch = useDispatch();
 
@@ -49,16 +49,16 @@ const TaskCard = (props) => {
               </Divider>
 
               <Radio.Group onChange={ChangeStatusHandler}>
-                <Radio name="change" value={`${item.todoId}, backlog`}>
+                <Radio name="change" value={`${item.todoId},backlog`}>
                   Backlog
                 </Radio>
-                <Radio name="change" value={`${item.todoId}, inProgress`}>
+                <Radio name="change" value={`${item.todoId},inProgress`}>
                   In Process
                 </Radio>
-                <Radio name="change" value={`${item.todoId}, inReview`}>
+                <Radio name="change" value={`${item.todoId},inReview`}>
                   In Review
                 </Radio>
-                <Radio name="change" value={`${item.todoId}, done`}>
+                <Radio name="change" value={`${item.todoId},done`}>
                   Done
                 </Radio>
               </Radio.Group>
