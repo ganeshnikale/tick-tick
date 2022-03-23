@@ -1,5 +1,9 @@
+import AddTodos from '../../components/todos/addTodos';
+
 const AddTaskPage = () => {
-  return <h1>add task page</h1>;
+  return (
+    <AddTodos/>
+  );
 };
 
 export default AddTaskPage;

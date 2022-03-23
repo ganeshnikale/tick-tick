@@ -1,10 +1,10 @@
 import {  useDispatch } from "react-redux";
 import { ChangeStatus } from "../../store/todosAction";
+import ReactHtmlParser from 'react-html-parser';
 import { Card, List, Radio, Typography, Divider } from "antd";
 const {  Paragraph } = Typography;
 const TaskCard = (props) => {
   const dispatch = useDispatch();
-
   const ChangeStatusHandler = (values) => {
     dispatch(ChangeStatus(values.target.value));
   };
@@ -38,7 +38,7 @@ const TaskCard = (props) => {
               <Divider style={{ marginTop: 0, marginBottom: 5 }} />
 
               {item.discription != null ? (
-                <Paragraph>{item.discription}</Paragraph>
+                <Paragraph>{ReactHtmlParser(item.discription)}</Paragraph>
               ) : (
                 ""
               )}
