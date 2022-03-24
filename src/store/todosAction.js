@@ -77,7 +77,7 @@ export const ChangeStatus = (status) => {
     const todoStoreRef = firestore.collection("todos");
     await todoStoreRef.doc(statusId[0]).update({ status: statusId[1] });
 
-    //dispatch(todosSliceAction.changeStatus(statusId))
+   // dispatch(todosSliceAction.changeStatus(statusId))
   };
 };
 
