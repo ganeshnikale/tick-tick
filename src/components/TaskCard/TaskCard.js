@@ -8,12 +8,14 @@ const TaskCard = (props) => {
   const ChangeStatusHandler = (values) => {
     dispatch(ChangeStatus(values.target.value));
   };
+ 
   return (
     <div>
       <List
         itemLayout="vertical"
         dataSource={props.taskMeta}
         renderItem={(item) => (
+
           <li
             className="site-card-border-less-wrapper"
             style={{
@@ -23,6 +25,7 @@ const TaskCard = (props) => {
               boxShadow: "0 5px 10px #eee",
             }}
           >
+          
             <Card bordered={false}>
               <h5 className="ant-typography ant-typography-danger">
                 {" "}
@@ -65,7 +68,7 @@ const TaskCard = (props) => {
               <Divider orientation="left" plain>
                 Time
               </Divider>
-              <Paragraph lavel={5}>{Date(item.createAt)}</Paragraph>
+              <Paragraph lavel={5}>{ item.createAt }</Paragraph>
             </Card>
           </li>
         )}
