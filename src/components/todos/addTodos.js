@@ -7,7 +7,7 @@ import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-import { Form, Input, Button, Select, Card } from "antd";
+import { Form, Input, Button, Select, Card, Row, Col } from "antd";
 
 const AddTodos = () => {
   const dispatch = useDispatch();
@@ -42,37 +42,48 @@ const AddTodos = () => {
         initialValues={{ remember: true }}
         name="basic"
       >
-        <Form.Item label="Task Title" name="taskTitle">
-          <Input placeholder="Add Todo" />
-        </Form.Item>
-        <Form.Item label="Select Project" name="selectProject">
-          <Select>
-            {Projects &&
-              Projects.map((x, i) => (
-                <Select.Option key={i} value={x.projectId}>
-                  {x.projectName}
-                </Select.Option>
-              ))}
-          </Select>
-        </Form.Item>
-        <Form.Item name="taskDiscription" label="Task Discription">
-          {/* <Input.TextArea /> */}
-          <Editor
-          
-          toolbarClassName="toolbarClassName"
-          wrapperClassName="wrapperClassName"
-          editorClassName="editorClassName"
-          
-        />
-        </Form.Item>
+        <Row>
+          <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+            {/* Task Title */}
+            <Form.Item label="Task Title" name="taskTitle" style={{marginBottom: 0}}>
+              <Input placeholder="Add Todo" />
+            </Form.Item>
+          </Col>
 
+          <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+            {/* Select project */}
+            <Form.Item label="Select Project" name="selectProject" style={{marginBottom: 0}}>
+              <Select>
+                {Projects &&
+                  Projects.map((x, i) => (
+                    <Select.Option key={i} value={x.projectId}>
+                      {x.projectName}
+                    </Select.Option>
+                  ))}
+              </Select>
+            </Form.Item>
+          </Col>
 
-        
-        
-        <Button type="primary" htmlType="submit">
-          {" "}
-          Add Todo
-        </Button>
+          <Col xl={24}>
+            {/* text editor */}
+            <Form.Item name="taskDiscription" label="Task Discription">
+              {/* <Input.TextArea /> */}
+              <Editor
+                toolbarClassName="toolbarClassName"
+                wrapperClassName="wrapperClassName"
+                editorClassName="editorClassName"
+                editorStyle={{height:16 + 'rem', border:1 + 'px solid lightGrey'}}
+              />
+            </Form.Item>
+          </Col>
+
+          <Col xl={24}>
+            <Button type="primary" htmlType="submit">
+              {" "}
+              Add Todo
+            </Button>
+          </Col>
+        </Row>
       </Form>
     </Card>
   );
