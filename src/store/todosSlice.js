@@ -7,6 +7,7 @@ const todosSlice = createSlice({
     filterSortedTodos: [],
     filterBy: null,
     filterByStatus: [],
+    taskDetail: [],
   },
   reducers: {
     setTodo(state, action) {
@@ -33,6 +34,12 @@ const todosSlice = createSlice({
       });
     },
     filterByStatusReducer(state, action) {},
+
+    taskDetail(state, action) {
+      state.taskDetail = state.todos.filter((x) => {
+        return x.todoId === action.payload
+      });
+    }
   },
 });
 

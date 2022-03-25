@@ -92,3 +92,10 @@ export const filterByStatus = (status) => {
     await dispatch(todosSliceAction.filterByStatusReducer(status));
   };
 };
+
+
+export const getTaskDetails = (taskId) =>{
+  return async(dispatch) =>{
+    await dispatch(todosSliceAction.taskDetail(taskId))
+  }
+}
