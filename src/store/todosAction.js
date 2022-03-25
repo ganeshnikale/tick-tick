@@ -99,3 +99,13 @@ export const getTaskDetails = (taskId) =>{
     await dispatch(todosSliceAction.taskDetail(taskId))
   }
 }
+
+export const deleteTask = (taskId) => {
+  console.log(taskId)
+  return async(dispatch) => {
+    const todoStoreRef = firestore.collection("todos").doc(taskId);
+    await todoStoreRef.delete().then(() => {
+      console.log("Document successfully deleted!");
+    })
+  }
+}

@@ -1,9 +1,10 @@
 
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import {getTaskDetails} from '../../store/todosAction';
 import TaskCard from "../../components/TaskCard/TaskCard";
+import TaskActionBtn from "../../components/taskActionBtn/taskActionBtn";
 const TaskDetailsPage = () =>{
     let params = useParams();
     const dispatch = useDispatch();
@@ -17,7 +18,10 @@ const TaskDetailsPage = () =>{
 
 
     return (
-        <TaskCard taskMeta={taskDetails}></TaskCard>
+        <Fragment>
+            <TaskActionBtn TaskId={taskId}></TaskActionBtn>
+            <TaskCard taskMeta={taskDetails}></TaskCard>
+        </Fragment>
     )
 }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProject } from "../../store/projectsAction";
 import { AddTodo } from "../../store/todosAction";
-
+import { useNavigate } from "react-router-dom";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -11,6 +11,7 @@ import { Form, Input, Button, Select, Card, Row, Col } from "antd";
 
 const AddTodos = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const uid = useSelector((state) => state.users.googleuserDetails[0].uid);
 
   const [form] = Form.useForm();
@@ -24,6 +25,7 @@ const AddTodos = () => {
         projectId: values.selectProject,
       })
     );
+    navigate('/');
   };
 
  
