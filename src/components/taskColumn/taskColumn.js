@@ -1,6 +1,5 @@
 import { Col, Typography } from "antd";
 import TaskCard from "../TaskCard/TaskCard";
-
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { filterByStatus } from "../../store/todosAction";

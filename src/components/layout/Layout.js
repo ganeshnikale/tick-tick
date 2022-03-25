@@ -4,6 +4,7 @@ import {  Layout } from "antd";
 import HeaderNav from "../header/header";
 import TaskDashboard from "../../pages/taskDashboard/taskDashboard";
 import AddTaskPage from "../../pages/addTaskPage/addTaskPage";
+import Projects from '../../pages/project/project';
 import Sidebar from "./Sidbar";
 
 const { Header, Content } = Layout;
@@ -23,6 +24,7 @@ const HomeLayout = () => {
           <Routes>
             <Route exact path="/" element={<TaskDashboard />} />
             <Route path="/addTask" element={<AddTaskPage />} />
+            <Route path="/projects" element={<Projects />} />
           </Routes>
         </Content>
       </Layout>

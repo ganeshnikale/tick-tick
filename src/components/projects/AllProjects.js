@@ -1,42 +1,28 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { Card, List } from 'antd';
-import {filterTodos} from '../../store/todosAction';
+import React from "react";
+import ProjectCard from './projectCard';
+import { Card, List } from "antd";
+
+const AllProjects = (props) => {
 
 
-
-const AllProjects = () => {
-  const dispatch = useDispatch();
-    const Projects = useSelector(state => state.projects.project);
-
-
-    const filterTodosHandler = (projectName) => {
-      
-      dispatch(filterTodos(projectName));
-    }
-    useEffect(() => {
-      const filterTodosHandler = (projectName) => {
-      
-        dispatch(filterTodos(projectName));
-      }
-      filterTodosHandler()
-    }, [filterTodosHandler])
-    return (
-        <Card  title="All Projects">
-        <List itemLayout="horizontal" dataSource={Projects}
-        renderItem={item => (
-          <List.Item>
-            <List.Item.Meta onClick={() => filterTodosHandler(item.projectName)}
-              title={item.projectName}
-              description={item.createAt}
-            />
-          </List.Item>
-        )}>
-
-     </List>
-   </Card>
-    )
-}
-
+  return (
+     <Card title="All Projects">
+            <List
+                itemLayout="horizontal"
+                dataSource={props.projects}
+                renderItem={(item) => (
+                <List.Item>
+                    <List.Item.Meta
+                    
+                    title={item.projectName}
+                    description={item.createAt}
+                    />
+                </List.Item>
+                )}
+            ></List>
+    </Card>
+  );
+};
 
 export default AllProjects;
+
