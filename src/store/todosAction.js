@@ -42,8 +42,8 @@ const mergeById = (array1, array2) =>
 
 export const AddTodo = (todoData) => {
   console.log(todoData)
+  const date = new Date();
   return async (dispatch) => {
-    const date = new Date();
     const todoStoreRef = firestore.collection("todos").doc();
     await todoStoreRef.set({
       projectId: todoData.projectId,

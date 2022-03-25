@@ -30,9 +30,12 @@ function Sidebar() {
           <Link to="/addTask">Tasks</Link>
         </Menu.Item>
         <Menu.Item key="3" icon={<UploadOutlined />}>
+          <Link to="/projects">Projects</Link>
+        </Menu.Item>
+        <Menu.Item key="4" icon={<UploadOutlined />}>
           Documents
         </Menu.Item>
-        <Menu.Item key="4" icon={<UserOutlined />}>
+        <Menu.Item key="5" icon={<UserOutlined />}>
           Notes
         </Menu.Item>
       </Menu>
