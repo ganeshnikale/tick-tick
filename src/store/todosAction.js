@@ -109,3 +109,10 @@ export const deleteTask = (taskId) => {
     })
   }
 }
+
+export const updateTask = (taskId) => {
+  return async(dispatch) => {
+    console.log(taskId);
+    
+  }
+}
