@@ -5,6 +5,8 @@ import HeaderNav from "../header/header";
 import TaskDashboard from "../../pages/taskDashboard/taskDashboard";
 import AddTaskPage from "../../pages/addTaskPage/addTaskPage";
 import Projects from '../../pages/project/project';
+import TaskDetailsPage from '../../pages/taskDetailsPage/taskDetailsPage';
+import UpdateTaskPage from '../../pages/updateTassk/updateTask';
 import Sidebar from "./Sidbar";
 
 const { Header, Content } = Layout;
@@ -25,6 +27,9 @@ const HomeLayout = () => {
             <Route exact path="/" element={<TaskDashboard />} />
             <Route path="/addTask" element={<AddTaskPage />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/taskDetails/:taskId" element={<TaskDetailsPage />} />
+            <Route path="/updateTask" element={<UpdateTaskPage />} />
+            updateTask
           </Routes>
         </Content>
       </Layout>

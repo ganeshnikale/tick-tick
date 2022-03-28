@@ -2,6 +2,7 @@ import {  useDispatch } from "react-redux";
 import { ChangeStatus } from "../../store/todosAction";
 import ReactHtmlParser from 'react-html-parser';
 import { Card, List, Radio, Typography, Divider } from "antd";
+import { Link } from "react-router-dom";
 const {  Paragraph } = Typography;
 const TaskCard = (props) => {
   const dispatch = useDispatch();
@@ -25,51 +26,53 @@ const TaskCard = (props) => {
               boxShadow: "0 5px 10px #eee",
             }}
           >
-          
-            <Card bordered={false}>
-              <h5 className="ant-typography ant-typography-danger">
-                {" "}
-                {item.projectName}
-              </h5>
+           
+              <Card bordered={false}>
+                <h5 className="ant-typography ant-typography-danger">
+                  {" "}
+                  {item.projectName}
+                </h5>
 
-              <Divider style={{ marginTop: 5, marginBottom: 8 }} />
+                <Divider style={{ marginTop: 5, marginBottom: 8 }} />
 
-              <Paragraph style={{ textAlign: "right" }}>
-                Status: <b>{item.status}</b>
-              </Paragraph>
+                <Paragraph style={{ textAlign: "right" }}>
+                  Status: <b>{item.status}</b>
+                </Paragraph>
 
-              <Divider style={{ marginTop: 0, marginBottom: 5 }} />
+                <Divider style={{ marginTop: 0, marginBottom: 5 }} />
 
-              {item.discription != null ? (
-                <Paragraph>{ReactHtmlParser(item.discription)}</Paragraph>
-              ) : (
-                ""
-              )}
-              <Divider style={{ marginTop: 5, marginBottom: 5 }} />
+                {item.discription != null ? (
+                  <Paragraph>{ReactHtmlParser(item.discription)}</Paragraph>
+                ) : (
+                  ""
+                )}
+                <Divider style={{ marginTop: 5, marginBottom: 5 }} />
 
-              <Divider orientation="left" plain>
-                Change status
-              </Divider>
+                <Divider orientation="left" plain>
+                  Change status
+                </Divider>
 
-              <Radio.Group onChange={ChangeStatusHandler}>
-                <Radio name="change" value={`${item.todoId},backlog`}>
-                  Backlog
-                </Radio>
-                <Radio name="change" value={`${item.todoId},inProgress`}>
-                  In Process
-                </Radio>
-                <Radio name="change" value={`${item.todoId},inReview`}>
-                  In Review
-                </Radio>
-                <Radio name="change" value={`${item.todoId},done`}>
-                  Done
-                </Radio>
-              </Radio.Group>
-              <Divider orientation="left" plain>
-                Time
-              </Divider>
-              <Paragraph lavel={5}>{ item.createAt }</Paragraph>
-            </Card>
+                <Radio.Group onChange={ChangeStatusHandler}>
+                  <Radio name="change" value={`${item.todoId},backlog`}>
+                    Backlog
+                  </Radio>
+                  <Radio name="change" value={`${item.todoId},inProgress`}>
+                    In Process
+                  </Radio>
+                  <Radio name="change" value={`${item.todoId},inReview`}>
+                    In Review
+                  </Radio>
+                  <Radio name="change" value={`${item.todoId},done`}>
+                    Done
+                  </Radio>
+                </Radio.Group>
+                <Divider orientation="left" plain>
+                  Time
+                </Divider>
+                <Paragraph lavel={5}>{ item.createAt }</Paragraph>
+                <Link to={"taskDetails/"+item.todoId}>View details</Link>
+              </Card>
+            
           </li>
         )}
       ></List>

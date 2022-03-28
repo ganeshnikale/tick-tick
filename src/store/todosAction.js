@@ -92,3 +92,27 @@ export const filterByStatus = (status) => {
     await dispatch(todosSliceAction.filterByStatusReducer(status));
   };
 };
+
+
+export const getTaskDetails = (taskId) =>{
+  return async(dispatch) =>{
+    await dispatch(todosSliceAction.taskDetail(taskId))
+  }
+}
+
+export const deleteTask = (taskId) => {
+  console.log(taskId)
+  return async(dispatch) => {
+    const todoStoreRef = firestore.collection("todos").doc(taskId);
+    await todoStoreRef.delete().then(() => {
+      console.log("Document successfully deleted!");
+    })
+  }
+}
+
+export const updateTask = (taskId) => {
+  return async(dispatch) => {
+    console.log(taskId);
+    
+  }
+}

@@ -1,60 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProject } from "../../store/projectsAction";
-import { AddTodo } from "../../store/todosAction";
+import {updateTask} from '../../store/todosAction';
+
 import { useNavigate } from "react-router-dom";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
+import htmlToDraft from 'html-to-draftjs';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 import { Form, Input, Button, Select, Card, Row, Col } from "antd";
 
-const AddTodos = () => {
+const UpdateTask = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const uid = useSelector((state) => state.users.googleuserDetails[0].uid);
+  
 
   const [form] = Form.useForm();
+  
 
-  const AddTodoHandler = (values) => {
-    dispatch(
-      AddTodo({
-        uid: uid,
-        todoText: values.taskTitle,
-        todoDicscription: draftToHtml(values.taskDiscription),
-        projectId: values.selectProject,
-      })
-    );
-    navigate('/');
-  };
-
+    const editorData = htmlToDraft(props.taskForUpdate[0].discription);
+    console.log(editorData.contentBlocks);
+    
+    const UpdateTodoHandler = (value) =>{
+        console.log('handler clicked');
+        console.log(value);
+    }
  
-
-  useEffect(() => {
-    dispatch(fetchProject(uid));
-  }, [AddTodoHandler]);
-  const Projects = useSelector((state) => state.projects.project);
-
+    const Projects = useSelector((state) => state.projects.project);
   return (
     <Card title="Add Todo">
       <Form
         layout="vertical"
-        onFinish={AddTodoHandler}
+        onFinish={UpdateTodoHandler}
         form={form}
-        initialValues={{ remember: true }}
+        fields={props.taskForUpdate}
+        initialValues={ props.taskForUpdate[0]}
         name="basic"
       >
         <Row>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
             {/* Task Title */}
-            <Form.Item label="Task Title" name="taskTitle" style={{marginBottom: 0}}>
+            <Form.Item label="Task Title" name="text" style={{marginBottom: 0}}>
               <Input placeholder="Add Todo" />
             </Form.Item>
           </Col>
 
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
             {/* Select project */}
-            <Form.Item label="Select Project" name="selectProject" style={{marginBottom: 0}}>
+            <Form.Item label="Select Project" name="projectName" style={{marginBottom: 0}}>
               <Select>
                 {Projects &&
                   Projects.map((x, i) => (
@@ -68,12 +61,12 @@ const AddTodos = () => {
 
           <Col xl={24}>
             {/* text editor */}
-            <Form.Item name="taskDiscription" label="Task Discription">
-              {/* <Input.TextArea /> */}
+            <Form.Item name="discription" label="Task Discription">
               <Editor
                 toolbarClassName="toolbarClassName"
                 wrapperClassName="wrapperClassName"
                 editorClassName="editorClassName"
+                editorState={editorData}
                 editorStyle={{height:16 + 'rem', border:1 + 'px solid lightGrey'}}
               />
             </Form.Item>
@@ -91,4 +84,4 @@ const AddTodos = () => {
   );
 };
 
-export default AddTodos;
+export default UpdateTask;
